@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <footer class="d-flex justify-content-center m-3"
+        <footer class="d-flex flex-wrap justify-content-center m-3"
                 tal:condition="view.actions and (view.mode == 'input')">
             <tal:loop repeat="action view.actions.values()">
                 ${structure:action.render()}
