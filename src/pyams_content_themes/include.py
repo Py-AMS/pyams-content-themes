@@ -18,7 +18,7 @@ This module is used for Pyramid integration
 import re
 
 from pyams_content.skin.interfaces import IPyAMSDefaultLayer
-from pyams_form.interfaces import INPUT_MODE
+from pyams_form.interfaces import DISPLAY_MODE, INPUT_MODE
 from pyams_form.interfaces.form import IForm
 from pyams_form.interfaces.widget import IObjectWidget, ISingleCheckBoxWidget, IWidget
 from pyams_form.template import override_widget_layout, override_widget_template
@@ -53,6 +53,11 @@ def include_package(config):
 
     # Overriden widgets layouts
     override_widget_layout(IWidget,
+                           layer=IPyAMSDefaultLayer,
+                           template='templates/widget-layout.pt')
+
+    override_widget_layout(IWidget,
+                           mode=DISPLAY_MODE,
                            layer=IPyAMSDefaultLayer,
                            template='templates/widget-layout.pt')
 
