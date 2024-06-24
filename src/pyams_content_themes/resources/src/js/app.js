@@ -96,7 +96,7 @@ $(document).ready(() => {
 	/**
 	 * Initialize search forms
 	 */
-	const searchForms = $('form[id="search-results"]');
+	const searchForms = $('form[id^="search-"]');
 	if (searchForms.length > 0) {
 		window.PyAMS_search = PyAMS_search;
 	}
@@ -173,6 +173,12 @@ $(document).ready(() => {
 
 	checkAlerts();
 
+	$('[data-toggle="popover"]').popover({
+		html: true,
+		content: function(){
+			return $(`[id="${$(this).data('target')}"`).html();
+		}
+	});
 
 	/**
 	 * Maps configuration
