@@ -13,7 +13,7 @@ const MyAMS = {
 	},
 
 	/**
-	 * Get and execute a function given by name
+	 * Get a function given by name
 	 * Small piece of code by Jason Bunting
 	 */
 	getFunctionByName: (functionName, context) => {
@@ -38,6 +38,17 @@ const MyAMS = {
 			return context[func];
 		} catch (e) {
 			return undefined;
+		}
+	},
+
+	/**
+	 * Execute a function given by name
+	 */
+	executeFunctionByName: (functionName, context /*, args */) => {
+		const func = MyAMS.getFunctionByName(functionName, window);
+		if (typeof func === 'function') {
+			const args = Array.prototype.slice.call(arguments, 2);
+			return func.apply(context, args);
 		}
 	},
 
@@ -100,7 +111,7 @@ const MyAMS = {
 	/**
 	 * CSS file loader function
 	 * Cross-browser code copied from Stoyan Stefanov blog to be able to
-	 * call a callback when CSS is realy loaded.
+	 * call a callback when CSS is really loaded.
 	 * See: https://www.phpied.com/when-is-a-stylesheet-really-loaded
 	 *
 	 * @param url: CSS file URL
@@ -185,8 +196,161 @@ const MyAMS = {
 
 
 /**
+ * Strings extensions
+ */
+$.extend(String.prototype, {
+
+	/**
+	 * Replace dashed names with camelCase variation
+	 */
+	camelCase: function() {
+		if (!this) {
+			return this;
+		}
+		return this.replace(/-(.)/g, (dash, rest) => {
+			return rest.toUpperCase();
+		});
+	},
+
+	/**
+	 * Replace camelCase string with dashed name
+	 */
+	deCase: function() {
+		if (!this) {
+			return this;
+		}
+		return this.replace(/[A-Z]/g, (cap) => {
+			return `-${cap.toLowerCase()}`;
+		});
+	},
+
+	/**
+	 * Convert first letter only to lowercase
+	 */
+	initLowerCase: function() {
+		if (!this) {
+			return this;
+		}
+		return this.charAt(0).toLowerCase() + this.slice(1);
+	},
+
+	/**
+	 * Convert URL params to object
+	 */
+	unserialize: function () {
+		if (!this) {
+			return this;
+		}
+		const
+			str = decodeURIComponent(this),
+			chunks = str.split('&'),
+			obj = {};
+		for (const chunk of chunks) {
+			const [key, val] = chunk.split('=', 2);
+			obj[key] = val;
+		}
+		return obj;
+	}
+});
+
+
+/**
+ * JQuery extensions
+ */
+$.fn.extend({
+
+	exists: function() {
+		return $(this).length > 0;
+	},
+
+	removeClassPrefix: function(prefix) {
+		this.each(function(i, it) {
+			const classes = it.className.split(/\s+/).map((item) => {
+				return item.startsWith(prefix) ? "" : item;
+			});
+			it.className = $.trim(classes.join(" "));
+		});
+		return this;
+	}
+});
+
+
+/**
  * Initialize custom click handlers
  */
+
+const openPage = (href) => {
+	if (window.location.toString() === href) {
+		window.location.reload();
+	} else {
+		window.location = href;
+	}
+};
+
+const linkClickHandler = (evt) => {
+	return new Promise((resolve, reject) => {
+		const
+			link = $(evt.currentTarget),
+			handlers = link.data('ams-disabled-handlers');
+		if ((handlers === true) || (handlers === 'click') || (handlers === 'all')) {
+			return;
+		}
+		let href = link.attr('href') || link.data('ams-url');
+		if (!href ||
+			href.startsWith('javascript:') ||
+			link.attr('target') ||
+			(link.data('ams-context-menu') === true)) {
+			return;
+		}
+		evt.preventDefault();
+		evt.stopPropagation();
+
+		let url,
+			target,
+			params;
+		if (href.indexOf('?') >= 0) {
+			url = href.split('?');
+			target = url[0];
+			params = url[1].unserialize();
+		} else {
+			target = href;
+			params = undefined;
+		}
+		const hrefGetter = MyAMS.getFunctionByName(target);
+		if (typeof hrefGetter === 'function') {
+			href = hrefGetter(link, params);
+		}
+		if (!href) {
+			resolve(null);
+		}
+		else if (typeof href === 'function') {
+			resolve(href(link, params));
+		} else {
+			// Standard AJAX or browser URL call
+			// Convert %23 characters to #
+			href = href.replace(/%23/, '#');
+			if (evt.ctrlKey) {
+				window.open && window.open(href);
+				resolve();
+			} else {
+				const linkTarget = link.data('ams-target') || link.attr('target');
+				if (linkTarget) {
+					if (linkTarget === '_blank') {
+						window.open && window.open(href);
+						resolve();
+					} else if (linkTarget === '_top') {
+						window.location = href;
+						resolve();
+					}
+				} else {
+					openPage(href);
+					resolve();
+				}
+			}
+		}
+	});
+};
+
 $(document).on('click', '[data-ams-click-handler]', (event) => {
 	const
 		source = $(event.currentTarget),
@@ -207,6 +371,28 @@ $(document).on('click', '[data-ams-click-handler]', (event) => {
 		}
 	}
 });
+
+$(document).on('click',
+	'a[href!="#"]:not([data-toggle]), ' +
+	'[data-ams-url]:not([data-toggle])', (evt) => {
+	// check for specific click handler
+	const handler = $(evt).data('ams-click-handler');
+	if (handler) {
+		return;
+	}
+	// check for DataTable collapse handler
+	if (evt.target.tagName === 'TD') {
+		const target = $(evt.target);
+		if (target.hasClass('dtr-control')) {
+			const table = target.parents('table.datatable');
+			if (table.hasClass('collapsed')) {
+				return;
+			}
+		}
+	}
+	return linkClickHandler(evt);
+});
+
 
 /**
  * Initialize custom change handlers
@@ -237,6 +423,34 @@ $(document).on('change', '[data-ams-change-handler]', (event) => {
 		}
 	}
 });
+
+
+/**
+ * Initialize custom events handlers
+ */
+$(document).ready(() => {
+	$('[data-ams-events-handlers]').each((idx, elt) => {
+		const
+			source = $(elt),
+			handlers = source.data('ams-events-handlers');
+		if (handlers) {
+			const
+				selector = source.data('ams-events-handlers-context'),
+				context = selector ? source.parents(selector) : source;
+			for (const [event, handler] of Object.entries(handlers)) {
+				context.on(event, (event, ...options) => {
+					const callback = MyAMS.getFunctionByName(handler);
+					if (options.length > 0) {
+						callback.call(document, event, ...options);
+					} else {
+						callback.call(document, event, source.data('ams-events-options') || {});
+					}
+				});
+			}
+		}
+	});
+});
+
 
 window.MyAMS = MyAMS;
 
