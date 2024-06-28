@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.99.2
+------
+ - updated forms and widgets layouts
+ - added aggregated filters support
+ - added responsive font sizes
+ - updated styles
+
 1.99.1
 ------
  - added flex wrapper class to form buttons
