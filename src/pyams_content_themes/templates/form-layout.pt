@@ -1,4 +1,4 @@
-<section class="rounded-lg"
+<section class="container rounded-lg"
 		 data-ams-modules="form plugins"
 		 i18n:domain="pyams_content">
 	<h3 tal:define="title_class view.title_class | 'bg-secondary-modal'"
