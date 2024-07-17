@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.99.3
+------
+ - update form layout
+
 1.99.2
 ------
  - updated forms and widgets layouts
