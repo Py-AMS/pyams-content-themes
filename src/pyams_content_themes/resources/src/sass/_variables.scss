@@ -24,15 +24,18 @@ $h4-font-size:                   $font-size-base * 1.3 !default;
 $h5-font-size:                   $font-size-base * 1.1 !default;
 $h6-font-size:                   $font-size-base !default;
 
+$h1-font-size-mobile:            $font-size-base * 2 !default;
+$h2-font-size-mobile:            $font-size-base * 1.75 !default;
+
 
 //
 // devices width
 //
 
-$media-sm:                       576px;
-$media-md:                       768px;
-$media-lg:                       992px;
-$media-xl:                       1200px;
+$media-sm:                       576px !default;
+$media-md:                       768px !default;
+$media-lg:                       992px !default;
+$media-xl:                       1200px !default;
 
 
 //
@@ -74,6 +77,30 @@ $gray-800:                       #404040 !default;
 $gray-900:                       #292929 !default;
 $black:                          #000 !default;
 
+$base-color:                     #a30413 !default;
+$base-light-1:                   #d11a2b !default;
+$base-light-2:                   #e65664 !default;
+$base-dark-1:                    #79000c !default;
+$base-dark-2:                    #430006 !default;
+
+$comp-color:                     #1b8c04 !default;
+$comp-light-1:                   #32b416 !default;
+$comp-light-2:                   #60c64a !default;
+$comp-dark-1:                    #126900 !default;
+$comp-dark-2:                    #0a3a00 !default;
+
+$alt1-color:                     #7d957f !default;
+$alt1-light-1:                   #98b69b !default;
+$alt1-light-2:                   #c5e9c8 !default;
+$alt1-dark-1:                    #647765 !default;
+$alt1-dark-2:                    #516153 !default;
+
+$alt2-color:                     #9aa604 !default;
+$alt2-light-1:                   #c7d51a !default;
+$alt2-light-2:                   #e0ea58 !default;
+$alt2-dark-1:                    #727b00 !default;
+$alt2-dark-2:                    #3f4400 !default;
+
 $primary-0:                      #203e69 !default;
 $primary-light-1:                #334b6e !default;
 $primary-light-2:                #4a5b73 !default;
@@ -83,26 +110,22 @@ $primary-dark-2:                 #0e1b2d !default;
 $primary:                        $primary-0 !default;
 $info:                           $primary-light-2 !default;
 $light:                          $primary-light-2 !default;
-$danger:                         #dc3545 !default;
+$danger:                         #ca0021 !default;
 
 // body
 $body-bg:                        $white !default;
 $body-padding-xs-width:          0 !default;
-$body-padding-sm-width:          0 !default;
-$body-padding-md-width:          0 !default;
-$body-padding-lg-width:          0 !default;
-$body-padding-xl-width:          0 !default;
+$body-padding-sm-width:          1rem !default;
+$body-padding-md-width:          4% !default;
+$body-padding-lg-width:          8% !default;
+$body-padding-xl-width:          10% !default;
 
 // page
 $page-bg:                        $white !default;
-$page-shadow:                    none !default;
+$page-shadow:                    0 0 30px 15px rgba(0, 0, 0, 0.25) !default;
 
 // topbar
 $topbar-bg:                      $gray-800 !default;
-
-// body elements
-$table-th-bg:                    $topbar-bg !default;
-$thesaurus-term:                 $primary-light-1 !default;
 
 // header
 $header-underline:               $primary-light-1 !default;
@@ -114,17 +137,46 @@ $nav-light-hover-bg:             $gray-500 !default;
 $nav-tabs-hover:                 $gray-200 !default;
 $nav-tabs-link-active-bg:        $gray-200 !default;
 
+$nav-link-selected-border:       1px solid $primary-0 !default;
+$nav-link-selected-color:        $page-bg !default;
+$nav-link-selected-bg:           $primary-dark-1 !default;
+
 // tags
 $tags-badge-hover:               $primary !default;
+$tags-font-weight:               500 !default;
 
 // toolbox
 $toolbox-btn-light-bg:           $gray-300 !default;
 $toolbox-btn-light-hover-bg:     $gray-600 !default;
 
+// links
+$link-color:                     $primary-0 !default;
+$link-font-weight:               300 !default;
+
+// carousel
+$carousel-font-weight:           300 !default;
+
+// glossary
+$glossary-term-font-weight:      500 !default;
+
+// thesaurus
+$thesaurus-term:                 $primary-light-1 !default;
+$thesaurus-term-font-weight:     500 !default;
+
 // alerts
 $alerts-link:                    $white !default;
 $alerts-button-bg:               $danger !default;
 $alerts-button-fill:             $white !default;
+
+// tables
+$table-th:                       $gray-200 !default;
+$table-th-bg:                    $topbar-bg !default;
+
+// forms
+$form-required-font-weight:      500 !default;
+
+// calendars
+$fc-event-border:                $primary-light-1 !default;
 
 // footer
 $footer:                         $gray-600 !default;
@@ -140,8 +192,9 @@ $footer-hr-border:               $gray-700 !default;
 // mobile menu
 //
 
-$mobile-menu-title-color:        $gray-100;
-$mobile-menu-color:              $gray-500;
-$mobile-menu-color-active:       $gray-100;
-$mobile-menu-bg:                 $primary-dark-1;
-$mobile-menu-border:             $primary-light-1;
+$mobile-menu-title-color:        $gray-100 !default;
+$mobile-menu-color:              $gray-500 !default;
+$mobile-menu-color-active:       $gray-100 !default;
+$mobile-menu-bg:                 $primary-dark-1 !default;
+$mobile-menu-border:             $primary-light-1 !default;
+$mobile-menu-font-weight:        300 !default;

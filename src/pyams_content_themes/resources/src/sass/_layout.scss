@@ -57,12 +57,18 @@ body {
     background-color: $page-bg;
   }
 
+  >ul {
+    border-bottom: 1px solid $gray-200;
+  }
+
   >ul >li {
-    border-bottom: 4px solid transparent;
+    border-bottom: 1px solid $gray-200;
+    margin-bottom: -1px;
 
     &.active,
     &:hover {
       border-bottom: 4px solid $primary;
+      margin-bottom: -4px;
     }
     &:hover {
       background-color: $gray-200;
@@ -121,6 +127,15 @@ body {
 }
 
 
+.nav-link {
+  &.selected {
+    border: $nav-link-selected-border;
+    color: $nav-link-selected-color;
+    background-color: $nav-link-selected-bg;
+  }
+}
+
+
 #footer {
   background-color: $footer-bg;
 }
@@ -167,6 +182,9 @@ body {
   body {
     padding: 0 $body-padding-xs-width;
   }
+  .wrapper-alerts {
+    width: calc(100% - 2 * #{$body-padding-xs-width});
+  }
   .col-xs-0 {
     display: none;
   }
@@ -188,6 +206,9 @@ body {
       margin: 0 2em;
     }
   }
+  .wrapper-alerts {
+    width: calc(100% - 2 * #{$body-padding-sm-width});
+  }
   .col-sm-0 {
     display: none;
   }
@@ -204,6 +225,9 @@ body {
     .banner-wrapper {
       margin: 0 4em;
     }
+  }
+  .wrapper-alerts {
+    width: calc(100% - 2 * #{$body-padding-md-width});
   }
   .col-md-0 {
     display: none;
@@ -222,6 +246,9 @@ body {
       margin: 0 4em;
     }
   }
+  .wrapper-alerts {
+    width: calc(100% - 2 * #{$body-padding-lg-width});
+  }
   .col-lg-0 {
     display: none;
   }
@@ -238,6 +265,9 @@ body {
     .banner-wrapper {
       margin: 0 6em;
     }
+  }
+  .wrapper-alerts {
+    width: calc(100% - 2 * #{$body-padding-xl-width});
   }
   .col-xl-0 {
     display: none;

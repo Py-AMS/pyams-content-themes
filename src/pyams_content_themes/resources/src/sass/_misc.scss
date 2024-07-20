@@ -141,6 +141,15 @@ h6 {
 }
 
 
+.text-primary {
+  color: $primary-dark-1 !important;
+}
+
+[data-toggle="dropdown"] {
+  cursor: pointer;
+}
+
+
 .edito,
 #glossary-term {
   a[href]:not([href="#"]) {

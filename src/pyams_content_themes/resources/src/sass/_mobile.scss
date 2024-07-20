@@ -31,6 +31,22 @@
     z-index: 99;
     overflow: scroll;
 
+    .nav-link {
+      padding: 0.25rem 0.6rem;
+    }
+
+    .sub-menu {
+      .selected {
+        font-weight: bold;
+
+        &::before {
+          content: '>';
+          position: absolute;
+          left: 1rem;
+        }
+      }
+    }
+
     >ul {
       >li {
         border-width: 2px;
