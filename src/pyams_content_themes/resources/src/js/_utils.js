@@ -125,9 +125,8 @@ const MyAMS = {
 		if (callback) {
 			callback = MyAMS.getFunctionByName(callback);
 		}
-		const
-			head = $('HEAD');
-			style = $('style[data-ams-id="' + id + '"]', head);
+		const head = $('HEAD');
+		let style = $('style[data-ams-id="' + id + '"]', head);
 		if (style.length === 0) {
 			style = $('<style>').attr('data-ams-id', id)
 				.text('@import "' + MyAMS.getSource(url) + '";');
