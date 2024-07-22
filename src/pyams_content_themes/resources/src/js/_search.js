@@ -73,8 +73,19 @@ const PyAMS_search = {
 	switchFilter: (evt) => {
 		const
 			target = $(evt.currentTarget),
-			header = $(`[data-toggle="collapse"][href="#${target.attr('id')}"]`);
-		$('.fa', header).toggleClass('fa-caret-down').toggleClass('fa-caret-up');
+			header = $(`[data-toggle="collapse"][href="#${target.attr('id')}"]`),
+			switcher = $('.fa', header);
+		switcher.on('animationend', () => {
+			switcher
+				.removeClassPrefix('rotate')
+				.toggleClass('fa-caret-down').toggleClass('fa-caret-up')
+				.off('animationend');
+		});
+		if (switcher.hasClass('fa-caret-down')) {
+			switcher.addClass('rotate-cc');
+		} else {
+			switcher.addClass('rotate');
+		}
 	},
 
 	switchMoreFilters: (evt) => {

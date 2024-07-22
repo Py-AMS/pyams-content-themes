@@ -1,5 +1,23 @@
 @import "variables";
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate_cc {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-180deg);
+  }
+}
+
 
 h1,
 h2,
@@ -138,6 +156,37 @@ h6 {
       }
     }
   }
+}
+
+
+// primary background colors
+
+.bg-primary {
+  background-color: $primary;
+}
+.bg-primary-0 {
+  background-color: $primary-0;
+}
+.bg-primary-light-1 {
+  background-color: $primary-light-1;
+}
+.bg-primary-light-2 {
+  background-color: $primary-light-2;
+}
+.bg-primary-dark-1 {
+  background-color: $primary-dark-1;
+}
+.bg-primary-dark-2 {
+  background-color: $primary-dark-2;
+}
+
+
+.rotate {
+  animation: rotate 0.5s ease-in-out;
+}
+
+.rotate-cc {
+  animation: rotate_cc 0.5s ease-in-out;
 }
 
 
