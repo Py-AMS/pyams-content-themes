@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.99.4
+------
+ - added rotation transition to search filters switchers
+ - updated object widget template
+ - updated styles
+
 1.99.3
 ------
  - update form layout
