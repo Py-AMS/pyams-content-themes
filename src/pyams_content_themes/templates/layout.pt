@@ -3,6 +3,7 @@
     <head prefix="og:http://ogp.me/ns# article:http://ogp.me/ns/article# fb:http://ogp.me/ns/fb#">
         <i tal:omit-tag="">${structure:tales:metas}</i>
         <i tal:omit-tag="">${tales:resources}</i>
+        <i tal:omit-tag="">${structure:provider:pyams.top_scripts}</i>
     </head>
     <body class="${tales:skin_container_class}">
         <div class="page">
@@ -47,5 +48,6 @@
             <!-- End alerts -->
 
         </div>  <!-- page -->
+        <i tal:omit-tag="">${structure:provider:pyams.bottom_scripts}</i>
     </body>
 </html>
