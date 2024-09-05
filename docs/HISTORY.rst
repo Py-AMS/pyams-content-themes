@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.99.5
+------
+ - added top and bottom scripts to main layout
+
 1.99.4
 ------
  - added rotation transition to search filters switchers
