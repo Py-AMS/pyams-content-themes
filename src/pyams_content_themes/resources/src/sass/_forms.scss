@@ -37,11 +37,14 @@
         position: relative;
 
         &::after {
-          position: absolute;
-          right: 0;
           content: ' * ';
           color: $danger;
           font-weight: $form-required-font-weight;
+          
+          @media only screen and (min-width: $media-sm) {
+            position: absolute;
+            right: 0;
+          }
         }
       }
     }
