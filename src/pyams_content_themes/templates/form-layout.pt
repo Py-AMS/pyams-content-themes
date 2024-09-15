@@ -1,4 +1,4 @@
-<section class="container rounded-lg"
+<section class="container rounded-lg px-1 px-sm-2 px-md-3"
 		 data-ams-modules="form plugins"
 		 i18n:domain="pyams_content">
 	<h3 tal:define="title_class view.title_class | 'bg-secondary-modal'"
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 		</div>
-		<footer class="d-flex flex-wrap justify-content-center m-3"
+		<footer class="d-flex flex-column flex-sm-row flex-wrap justify-content-center m-3"
 				tal:condition="view.actions and (view.mode == 'input')">
 			<tal:loop repeat="action view.actions.values()">
 				${structure:action.render()}
