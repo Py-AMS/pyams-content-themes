@@ -8301,11 +8301,13 @@ table td {
 .form-group .object-field .form-group .required-field {
   position: relative; }
   .form-group .object-field .form-group .required-field::after {
-    position: absolute;
-    right: 0;
     content: ' * ';
     color: #ca0021;
     font-weight: 500; }
+    @media only screen and (min-width: 576px) {
+      .form-group .object-field .form-group .required-field::after {
+        position: absolute;
+        right: 0; } }
 
 .form-group .input .error {
   color: #ca0021; }

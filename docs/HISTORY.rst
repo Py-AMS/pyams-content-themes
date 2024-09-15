@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.99.7
+------
+ - version mismatch
+
+1.99.6
+------
+ - updated forms padding
+ - updated required field marker position inside object widgets
+
 1.99.5
 ------
  - added top and bottom scripts to main layout
