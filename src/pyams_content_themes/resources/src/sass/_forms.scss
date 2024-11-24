@@ -20,7 +20,7 @@
       &::after {
         content: ' * ';
         color: $danger;
-        font-weight: bold;
+        font-weight: $form-required-font-weight;
       }
     }
     .control-label {
@@ -63,6 +63,7 @@
       th,
       td {
         background-color: $page-bg;
+        color: $body-bg;
       }
     }
   }

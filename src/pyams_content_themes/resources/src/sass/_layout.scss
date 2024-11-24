@@ -5,9 +5,13 @@
 /**
  * PyAMS DarkGreen theme layout
  */
+:root {
+  --fc-event-border-color: #{$fc-event-border};
+}
 
 body {
   background-color: $body-bg;
+  font-weight: $font-family-base-weight;
 }
 
 
@@ -133,11 +137,6 @@ body {
     color: $nav-link-selected-color;
     background-color: $nav-link-selected-bg;
   }
-}
-
-
-#footer {
-  background-color: $footer-bg;
 }
 
 

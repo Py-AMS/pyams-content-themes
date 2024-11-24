@@ -18,7 +18,7 @@
   a {
     color: $footer-link;
     font-style: normal;
-    font-weight: 400;
+    font-weight: $link-font-weight;
   }
 
   .contact-details {

@@ -5,9 +5,12 @@
 @import "variables";
 
 @import "../../../../../node_modules/bootstrap/scss/bootstrap";
-@import "../../../../../node_modules/select2/select2.css";
+@import "../../../../../node_modules/bootstrap-milestones/dist/bootstrap-milestones.css";
+@import "../../../../../node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import "../../../../../node_modules/superfish/dist/css/superfish.css";
+@import "../../../../../node_modules/select2/src/scss/core";
 @import "../../../../../node_modules/select2-theme-bootstrap4/src/select2-bootstrap";
-@import "../../../../../node_modules/datatables.net-bs/css/dataTables.bootstrap.css";
+@import "../../../../../node_modules/tempusdominus-bootstrap-4/src/sass/tempusdominus-bootstrap-4";
 
 @import "layout";
 @import "footer";
@@ -19,7 +22,10 @@
 @import "search";
 @import "forms";
 @import "list";
+@import "table";
 @import "misc";
+@import "calendar";
+@import "gis";
 
 
 /* Version: $version$ */

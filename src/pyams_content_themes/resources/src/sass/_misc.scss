@@ -62,7 +62,6 @@ h6 {
 }
 
 
-
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
@@ -203,7 +202,7 @@ h6 {
 #glossary-term {
   a[href]:not([href="#"]) {
     font-style: italic;
-    font-weight: 600;
+    font-weight: $glossary-term-font-weight;
   }
 }
 
@@ -375,7 +374,7 @@ h6 {
 
 .tags {
   a {
-    font-weight: 500 !important;
+    font-weight: $tags-font-weight !important;
     font-style: normal !important;
   }
   a:hover {
@@ -390,6 +389,6 @@ h6 {
 .thesaurus-term {
   cursor: pointer;
   font-style: italic;
-  font-weight: 600;
+  font-weight: $thesaurus-term-font-weight;
   color: $thesaurus-term;
 }

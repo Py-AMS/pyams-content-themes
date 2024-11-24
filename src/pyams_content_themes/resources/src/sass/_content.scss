@@ -29,7 +29,7 @@ h6 {
       display: none;
     }
     a[href] {
-      font-weight: 600;
+      font-weight: $link-font-weight;
     }
   }
   .links {
@@ -77,21 +77,6 @@ legend {
 ul {
   padding-left: 1em;
   list-style-type: ' - ';
-}
-
-
-table {
-  thead {
-    th,
-    td {
-      background-color: $table-th-bg;
-    }
-  }
-  th,
-  td {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
 }
 
 

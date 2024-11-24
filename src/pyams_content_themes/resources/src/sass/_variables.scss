@@ -5,6 +5,7 @@
 
 $font-family-sans-serif:        "Josefin Sans", "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif !default;
 $font-family-base:               $font-family-sans-serif !default;
+$font-family-base-weight:        300 !default;
 
 $headings-font-family:           "Jockey One", "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif !default;
 $headings-font-weight:           400 !default;
@@ -130,6 +131,10 @@ $topbar-bg:                      $gray-800 !default;
 // header
 $header-underline:               $primary-light-1 !default;
 
+// footer
+$footer-color:                   $gray-100 !default;
+$footer-bg:                      $primary-dark-2 !default;
+
 // navigation
 $nav-light-bg:                   $gray-200 !default;
 $nav-light-hover-bg:             $gray-500 !default;
@@ -177,6 +182,11 @@ $form-required-font-weight:      500 !default;
 
 // calendars
 $fc-event-border:                $primary-light-1 !default;
+
+// datetime pickers
+$bs-datetimepicker-active-bg:          $primary-0 !default;
+$bs-datetimepicker-buttons-color:      $primary-dark-1 !default;
+$bs-datetimepicker-buttons-color-dark: $primary-dark-2 !default;
 
 // footer
 $footer:                         $gray-600 !default;
