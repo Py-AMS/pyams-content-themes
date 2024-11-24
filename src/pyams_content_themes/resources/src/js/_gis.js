@@ -12,6 +12,11 @@ const createMap = (map, config, options, callback) => {
 				config.attributionControl : data.mapLeafletAttributionControl,
 			zoomControl: data.mapLeafletZoomControl === undefined ?
 				config.zoomControl : data.mapLeafletZoomControl,
+			fullscreenControl: data.mapLeafletFullscreen === undefined ?
+				config.fullscreenControl && {
+					pseudoFullscreen: true
+				} || null :
+				data.mapLeafletFullscreen,
 			crs: data.mapLeafletCrs || MyAMS.getObject(config.crs) || L.CRS.EPSG3857,
 			center: data.mapLeafletCenter || config.center,
 			zoom: data.mapLeafletZoom || config.zoom,
@@ -32,14 +37,15 @@ const createMap = (map, config, options, callback) => {
 			}
 		} else {
 			layersConfig.push(L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				name: 'osm',
+				title: 'OpenStreetMap',
 				maxZoom: 19,
-				id: 'osm',
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			}));
 		}
-		$.when.apply($, layersConfig).then(function(...layers) {
-			for (const idx in layers) {
-				layers[idx].addTo(leafmap);
+		$.when.apply($, layersConfig).then((...layers) => {
+			for (const layer of layers) {
+				layer.addTo(leafmap);
 			}
 			if (config.zoomControl && (data.mapLeafletHideZoomControl !== true)) {
 				L.control.scale().addTo(leafmap);
@@ -66,6 +72,10 @@ const createMap = (map, config, options, callback) => {
 			}
 			map.data('leafmap', leafmap);
 			map.data('leafmap.config', config);
+			map.data('leafmap.layers', layers.reduce((res, layer) => ({
+				...res,
+				[layer.options.name]: layer
+			}), {}));
 			map.trigger('map.finishing', [map, leafmap, config]);
 			if (callback) {
 				callback(leafmap, config);
@@ -89,12 +99,16 @@ const PyAMS_GIS = {
 	init: (maps, options, callback) => {
 
 		window.PyAMS_GIS = PyAMS_GIS;
-		import('leaflet').then(() => {
-			import('leaflet-gesture-handling').then(() => {
-
-				import("../../../../../node_modules/leaflet/dist/leaflet.css");
-				import("../../../../../node_modules/leaflet-gesture-handling/dist/leaflet-gesture-handling.css");
-
+		Promise.all([
+			import('leaflet'),
+			import("leaflet/dist/leaflet.css")
+		]).then(() => {
+			Promise.all([
+				import('leaflet-gesture-handling'),
+				import("leaflet-gesture-handling/dist/leaflet-gesture-handling.css"),
+				import('leaflet-fullscreen'),
+				import('leaflet-fullscreen/dist/leaflet.fullscreen.css')
+			]).then(() => {
 				const $maps = $.map(maps, (elt) => {
 					return new Promise((resolve, reject) => {
 						const
@@ -104,11 +118,16 @@ const PyAMS_GIS = {
 						if (config) {
 							resolve(createMap(map, config, options, callback));
 						} else {
-							$.get(data.mapConfigurationUrl || 'get-map-configuration.json', (config) => {
-								resolve(createMap(map, config, options, callback));
+							$.get(data.mapConfigurationUrl || 'get-map-configuration.json').then((config) => {
+								createMap(map, config, options, callback).then((leafmap) => {
+									resolve({
+										'leafmap': leafmap,
+										'config': config
+									});
+								});
 							});
 						}
-					})
+					});
 				});
 				$.when.apply($, $maps).then();
 			});
@@ -185,6 +204,7 @@ const PyAMS_GIS = {
 				return L.geoportalLayer.WMS(layer);
 			}
 		},
+
 		ESRI: {
 			Feature: (map, leafmap, layer) => {
 				return L.esri.featureLayer(layer);

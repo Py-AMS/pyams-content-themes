@@ -1,12 +1,38 @@
 
 import MyAMS from "./_utils";
 import PyAMS_search from "./_search";
-import PyAMS_GIS from "./_gis";
+
+import "./_i18n";
 
 
-$(document).ready(() => {
+$(() => {
 
 	MyAMS.initData();
+
+	/**
+	 * Bootstrap tooltips and popovers
+	 */
+	$('body').tooltip({
+		selector: '.hint'
+	});
+
+	$('[data-toggle="popover"]').popover({
+		html: true,
+		content: function(){
+			return $(`[id="${$(this).data('target')}"`).html();
+		}
+	});
+
+
+	/**
+	 * Disable click on empty link
+	 */
+	$('a').on('click', (evt, x, y, z) => {
+		if ($(evt.currentTarget).attr('href') === '#') {
+			evt.preventDefault();
+		}
+	});
+
 
 	/**
 	 * Main navigation
@@ -85,10 +111,10 @@ $(document).ready(() => {
 	/**
 	 * Update generic forms
 	 */
-	const inputForms = $('.input-form');
-	if (inputForms.length > 0) {
+	const forms = $('.ams-form');
+	if (forms.length > 0) {
 		import('./_form').then(({default: PyAMS_form}) => {
-			PyAMS_form.init(inputForms);
+			PyAMS_form.init(forms);
 		});
 	}
 
@@ -99,6 +125,40 @@ $(document).ready(() => {
 	const searchForms = $('form[id^="search-"]');
 	if (searchForms.length > 0) {
 		window.PyAMS_search = PyAMS_search;
+	}
+
+
+	/**
+	 * Initialize calendars
+	 */
+	const calendars = $('.calendar');
+	if (calendars.length > 0) {
+		import('./_calendar').then(({default: PyAMS_calendar}) => {
+			PyAMS_calendar.init(calendars);
+		});
+	}
+
+
+	/**
+	 * Initialize tables
+	 */
+	const tables = $('.datatable');
+	if (tables.length > 0) {
+		import('./_table').then(({default: PyAMS_datatable}) => {
+			PyAMS_datatable.init(tables);
+		});
+	}
+
+
+	/**
+	 * Initialize maps
+	 */
+	const maps = $('.osmmap-map');
+	if (maps.length > 0) {
+		import('./_gis').then(({default: PyAMS_GIS}) => {
+			MyAMS.gis = PyAMS_GIS;
+			PyAMS_GIS.init(maps);
+		});
 	}
 
 
@@ -172,20 +232,5 @@ $(document).ready(() => {
 	});
 
 	checkAlerts();
-
-	$('[data-toggle="popover"]').popover({
-		html: true,
-		content: function(){
-			return $(`[id="${$(this).data('target')}"`).html();
-		}
-	});
-
-	/**
-	 * Maps configuration
-	 */
-	const maps = $('.osmmap-map');
-	if (maps.length > 0) {
-		PyAMS_GIS.init(maps);
-	}
 
 });

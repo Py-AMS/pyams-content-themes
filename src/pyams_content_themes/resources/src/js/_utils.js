@@ -98,10 +98,10 @@ const MyAMS = {
 		const
 			defaults = {
 				dataType: 'script',
-				url: ams.getSource(url),
+				url: MyAMS.getSource(url),
 				success: callback,
-				error: onerror || ams.error.show,
-				cache: !ams.devmode,
+				error: onerror,
+				cache: true,
 				async: options.async === undefined ? typeof(callback) === 'function' : options.async
 			};
 		const settings = $.extend({}, defaults, options);
@@ -260,6 +260,14 @@ $.fn.extend({
 
 	exists: function() {
 		return $(this).length > 0;
+	},
+
+	listattr: function(attr) {
+		const result = [];
+		this.each((index, element) => {
+			result.push($(element).attr(attr));
+		});
+		return result;
 	},
 
 	removeClassPrefix: function(prefix) {

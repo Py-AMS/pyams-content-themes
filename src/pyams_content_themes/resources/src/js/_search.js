@@ -21,7 +21,7 @@ const PyAMS_search = {
 		}
 	},
 
-	updateSearchFilters: (evt) => {
+	getSearchFilters: (evt) => {
 		const
 			urlParams = new URLSearchParams(window.location.search),
 			filterTypes = new Set($('input[name="filter"], select[name="filter"]').map((idx, elt) => {
@@ -36,8 +36,16 @@ const PyAMS_search = {
 				urlParams.append(filterType, value);
 			}
 		});
-		// Construct the new URL with updated parameters
-		window.location.href = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${urlParams.toString()}`;
+		return urlParams;
+	},
+
+	updateSearchFilters: (evt) => {
+		// Build the new URL with updated parameters
+		const params = PyAMS_search.getSearchFilters(evt);
+		if (params.has('start')) {
+			params.set('start', 0);
+		}
+		window.location.href = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${params.toString()}`;
 	},
 
 	previousPage: (evt) => {
@@ -68,6 +76,18 @@ const PyAMS_search = {
 			$('input[name="start"]', form).val(length * (target - 1));
 			form.submit();
 		}
+	},
+
+	changePage: (source) => {
+		const
+			filters = PyAMS_search.getSearchFilters(),
+			searchParams = source.data('ams-search-params');
+		for (const [key, value] of Object.entries(searchParams)) {
+			if (value !== '') {
+				filters.set(key, value);
+			}
+		}
+		window.location.href = `${window.location.protocol}//${window.location.host}${window.location.pathname}?${filters.toString()}`;
 	},
 
 	switchFilter: (evt) => {
