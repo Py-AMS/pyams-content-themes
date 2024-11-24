@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.0.0
+-----
+ - first released version
+ - updated dependencies
+ - added support for FullCalendar and DataTables
+ - added support for Python 3.12
+
 1.99.7
 ------
  - version mismatch
