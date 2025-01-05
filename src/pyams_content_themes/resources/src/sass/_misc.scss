@@ -314,6 +314,12 @@ h6 {
 }
 
 
+.break {
+  &-avoid {
+    break-inside: avoid;
+  }
+}
+
 
 .wrapper-quote {
   position: relative;
