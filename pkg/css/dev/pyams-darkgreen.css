@@ -10054,6 +10054,9 @@ h6 .underline {
 .filter-grayscale {
   filter: grayscale(); }
 
+.break-avoid {
+  break-inside: avoid; }
+
 .wrapper-quote {
   position: relative;
   padding-left: 80px; }

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.1
+-----
+ - added custom style to avoid inside breaks
+ - always set window.PyAMS_search attribute to handle search filters without associated search form
+
 2.0.0
 -----
  - first released version
