@@ -111,20 +111,13 @@ $(() => {
 	/**
 	 * Update generic forms
 	 */
+	window.PyAMS_search = PyAMS_search;
+
 	const forms = $('.ams-form');
 	if (forms.length > 0) {
 		import('./_form').then(({default: PyAMS_form}) => {
 			PyAMS_form.init(forms);
 		});
-	}
-
-
-	/**
-	 * Initialize search forms
-	 */
-	const searchForms = $('form[id^="search-"]');
-	if (searchForms.length > 0) {
-		window.PyAMS_search = PyAMS_search;
 	}
 
 
