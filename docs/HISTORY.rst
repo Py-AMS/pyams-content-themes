@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.0.2
+-----
+ - updated support for Python 3.12
+
 2.0.1
 -----
  - added custom style to avoid inside breaks
