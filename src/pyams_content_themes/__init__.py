@@ -17,7 +17,10 @@ PyAMS sample themes
 
 __docformat__ = 'restructuredtext'
 
-from importlib import resources
+try:
+    from importlib.resources import files
+except ImportError:
+    from importlib_resources import files
 
 from fanstatic import Library, Resource
 from pyramid.i18n import TranslationStringFactory
@@ -30,7 +33,7 @@ _ = TranslationStringFactory('pyams_content_themes')
 # PyAMS themes resources
 #
 
-pkg_dir = str(resources.files('pyams_content_themes') / 'resources' / 'static')
+pkg_dir = str(files('pyams_content_themes') / 'resources' / 'static')
 
 library = Library('pyams', pkg_dir)
 

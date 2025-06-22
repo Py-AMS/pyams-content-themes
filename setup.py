@@ -68,6 +68,7 @@ setup(name='pyams_content_themes',
           'setuptools',
           # -*- Extra requirements: -*-
           'fanstatic',
+          "importlib_resources; python_version < '3.9'",
           'pyams_content',
           'pyams_form',
           'pyams_layer',
