@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.0.5
+-----
+ - updated importlib.resources dependency
+
 2.0.4
 -----
  - packaging issue
