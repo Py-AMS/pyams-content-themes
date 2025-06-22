@@ -14,7 +14,7 @@
 This module contains PyAMS content themes package
 """
 import os
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 
 
 DOCS = os.path.join(os.path.dirname(__file__),
@@ -25,10 +25,6 @@ HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
 version = '2.0.2'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
-
-data_dir = 'pkg'
-data_files = [(d, [os.path.join(d, f) for f in files])
-              for d, folders, files in os.walk(data_dir)]
 
 tests_require = [
     'pyramid_zcml',
@@ -51,18 +47,17 @@ setup(name='pyams_content_themes',
       author_email='tflorac@ulthar.net',
       url='https://pyams.readthedocs.io',
       license='ZPL',
-      packages=find_packages('src'),
+      packages=find_namespace_packages('src'),
       package_dir={'': 'src'},
       namespace_packages=[],
-      include_package_data=True,
       package_data={
-          '': ['*.rst', '*.txt', '*.pt',
-               '*.pot', '*.po', '*.mo',
-               '*.png', '*.gif', '*.jpeg', '*.jpg', '*.svg',
-               '*.ttf', '*.woff2',
-               '*.scss', '*.css', '*.js', '*.map']
+          'pyams_content_themes.static': [
+              '*.rst', '*.txt', '*.pt', '*.pot', '*.po', '*.mo',
+              '*.png', '*.gif', '*.jpeg', '*.jpg', '*.svg',
+              '*.ttf', '*.eot', '*.woff', '*.woff2',
+              '*.scss', '*.css', '*.js', '*.map']
       },
-      data_files=data_files,
+      include_package_data=True,
       zip_safe=False,
       python_requires='>=3.7',
       # uncomment this to be able to run tests with setup.py
@@ -86,3 +81,5 @@ setup(name='pyams_content_themes',
               'pyams = pyams_content_themes:library'
           ]
       })
+
+

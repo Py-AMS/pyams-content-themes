@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.0.3
+-----
+ - updated packaging
+
 2.0.2
 -----
  - updated support for Python 3.12
