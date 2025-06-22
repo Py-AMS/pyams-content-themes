@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.0.4
+-----
+ - packaging issue
+
 2.0.3
 -----
  - updated packaging
