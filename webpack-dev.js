@@ -5,12 +5,12 @@ const webpack = require('webpack');
 module.exports = {
 	mode: 'development',
 	entry: {
-		'pyams': './src/pyams_content_themes/resources/src/js/pyams.js',
-		'pyams-almond': './src/pyams_content_themes/resources/src/js/pyams-almond.js',
-		'pyams-darkgreen': './src/pyams_content_themes/resources/src/js/pyams-darkgreen.js'
+		'pyams': './pkg/js/pyams.js',
+		'pyams-almond': './pkg/js/pyams-almond.js',
+		'pyams-darkgreen': './pkg/js/pyams-darkgreen.js'
 	},
 	output: {
-		path: path.resolve(__dirname, 'pkg', 'js', 'dev'),
+		path: path.resolve(__dirname, 'src', 'pyams_content_themes', 'resources', 'static', 'js', 'dev'),
 		filename: '[name].js',
 		assetModuleFilename: '../../assets/[name][ext]'
 	},

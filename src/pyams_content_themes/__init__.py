@@ -17,10 +17,9 @@ PyAMS sample themes
 
 __docformat__ = 'restructuredtext'
 
-import os
+from importlib import resources
 
 from fanstatic import Library, Resource
-from pkg_resources import Requirement, resource_filename
 from pyramid.i18n import TranslationStringFactory
 
 
@@ -31,12 +30,10 @@ _ = TranslationStringFactory('pyams_content_themes')
 # PyAMS themes resources
 #
 
-pkg_dir = resource_filename(Requirement.parse('pyams_content_themes'), 'pkg')
-if not os.path.exists(pkg_dir):
-    pkg_dir = '../../pkg'  # fallback for source installation
-
+pkg_dir = str(resources.files('pyams_content_themes') / 'resources' / 'static')
 
 library = Library('pyams', pkg_dir)
+
 
 pyams_default_theme = Resource(library, 'js/dev/pyams.js',
                                minified='js/dist/pyams.js',

@@ -12,66 +12,66 @@ const package = require('./package.json');
 
 
 task('sass_dev', function() {
-	return src('src/pyams_content_themes/resources/src/sass/pyams.scss')
+	return src('pkg/sass/pyams.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(replace('../../../../../node_modules', '../../../node_modules'))
+		.pipe(replace('../../node_modules', '../../../../../../node_modules'))
 		.pipe(replace('$version$', package.version))
-		.pipe(dest('pkg/css/dev'))
+		.pipe(dest('src/pyams_content_themes/resources/static/css/dev'))
 });
 
 exports.sass_dev = task('sass_dev');
 
 
 task('sass', function() {
-	return src('src/pyams_content_themes/resources/src/sass/pyams.scss')
+	return src('pkg/sass/pyams.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(replace('$version$', package.version))
 		.pipe(clean())
-		.pipe(dest('pkg/css/dist'))
+		.pipe(dest('src/pyams_content_themes/resources/static/css/dist'))
 });
 
 exports.sass = task('sass');
 
 
 task('sass_almond_dev', function() {
-	return src('src/pyams_content_themes/resources/src/sass/pyams-almond.scss')
+	return src('pkg/sass/pyams-almond.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(replace('../../../../../node_modules', '../../../node_modules'))
+		.pipe(replace('../../node_modules', '../../../../../../node_modules'))
 		.pipe(replace('$version$', package.version))
-		.pipe(dest('pkg/css/dev'))
+		.pipe(dest('src/pyams_content_themes/resources/static/css/dev'))
 });
 
 exports.sass_almond_dev = task('sass_almond_dev');
 
 
 task('sass_almond', function() {
-	return src('src/pyams_content_themes/resources/src/sass/pyams-almond.scss')
+	return src('pkg/sass/pyams-almond.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(replace('$version$', package.version))
 		.pipe(clean())
-		.pipe(dest('pkg/css/dist'))
+		.pipe(dest('src/pyams_content_themes/resources/static/css/dist'))
 });
 
 exports.sass_almond = task('sass_almond');
 
 
 task('sass_darkgreen_dev', function() {
-	return src('src/pyams_content_themes/resources/src/sass/pyams-darkgreen.scss')
+	return src('pkg/sass/pyams-darkgreen.scss')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(replace('../../../../../node_modules', '../../../node_modules'))
+		.pipe(replace('../../node_modules', '../../../../../../node_modules'))
 		.pipe(replace('$version$', package.version))
-		.pipe(dest('pkg/css/dev'))
+		.pipe(dest('src/pyams_content_themes/resources/static/css/dev'))
 });
 
 exports.sass_darkgreen_dev = task('sass_darkgreen_dev');
 
 
 task('sass_darkgreen', function() {
-	return src('src/pyams_content_themes/resources/src/sass/pyams-darkgreen.scss')
+	return src('pkg/sass/pyams-darkgreen.scss')
 		.pipe(sass().on('error', sass.logError))
 		.pipe(replace('$version$', package.version))
 		.pipe(clean())
-		.pipe(dest('pkg/css/dist'))
+		.pipe(dest('src/pyams_content_themes/resources/static/css/dist'))
 });
 
 exports.sass_darkgreen = task('sass_darkgreen');
@@ -79,10 +79,10 @@ exports.sass_darkgreen = task('sass_darkgreen');
 
 task('build_dev', function() {
 	const config = require('./webpack-dev.js');
-	return src('src/pyams_content_themes/resources/src/js/pyams.js')
+	return src('pkg/js/pyams.js')
 		.pipe(stream(config), webpack)
 		.pipe(replace('$version$', package.version))
-		.pipe(dest('pkg/js/dev'));
+		.pipe(dest('src/pyams_content_themes/resources/static/js/dev'));
 });
 
 exports.build_dev = task('build_dev');
@@ -90,21 +90,21 @@ exports.build_dev = task('build_dev');
 
 task('build', function() {
 	const config = require('./webpack.js');
-	return src('src/pyams_content_themes/resources/src/js/pyams.js')
+	return src('pkg/js/pyams.js')
 		.pipe(stream(config), webpack)
 		.pipe(replace('$version$', package.version))
-		.pipe(dest('pkg/js/dist'));
+		.pipe(dest('src/pyams_content_themes/resources/static/js/dist'));
 });
 
 exports.build = task('build');
 
 
 exports.default = function() {
-	watch('src/pyams_content_themes/resources/src/sass/*.scss',
+	watch('pkg/sass/*.scss',
 		parallel('sass_dev', 'sass',
 				 'sass_almond_dev', 'sass_almond',
 				 'sass_darkgreen_dev', 'sass_darkgreen'));
-	watch(['pkg/css/dist/*.css',
+	watch(['src/pyams_content_themes/resources/static/css/dist/*.css',
 			'src/pyams_content_themes/resources/src/js/*.js'],
 		parallel('build_dev', 'build'));
 };
