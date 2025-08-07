@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.1.0
+-----
+ - updated dependencies: jsrender, FontAwesome, FullCalendar...
+
 2.0.5
 -----
  - updated importlib.resources dependency
