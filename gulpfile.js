@@ -5,8 +5,8 @@ const clean = require('gulp-clean-css');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const sass = require('gulp-sass')(require('node-sass'));
-const webpack = require('gulp-webpack');
 const stream = require('webpack-stream');
+const webpack = require('gulp-webpack');
 
 const package = require('./package.json');
 
@@ -99,12 +99,21 @@ task('build', function() {
 exports.build = task('build');
 
 
+exports.all = parallel(
+	'sass_dev', 'sass',
+	'sass_almond_dev', 'sass_almond',
+	'sass_darkgreen_dev', 'sass_darkgreen',
+	'build_dev', 'build'
+);
+
+
 exports.default = function() {
 	watch('pkg/sass/*.scss',
 		parallel('sass_dev', 'sass',
 				 'sass_almond_dev', 'sass_almond',
 				 'sass_darkgreen_dev', 'sass_darkgreen'));
-	watch(['src/pyams_content_themes/resources/static/css/dist/*.css',
-			'src/pyams_content_themes/resources/src/js/*.js'],
-		parallel('build_dev', 'build'));
+	watch([
+		'pkg/js/*.js',
+		'src/pyams_content_themes/resources/static/css/*/*.css'
+	], parallel('build_dev', 'build'));
 };
