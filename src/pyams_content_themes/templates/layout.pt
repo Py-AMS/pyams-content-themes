@@ -44,7 +44,7 @@
             <!-- End page footer -->
 
             <!-- Alerts -->
-            <i tal:omit-tag="">${structure:provider:pyams_content.alerts(ignore_missing=True)}</i>
+            <i tal:omit-tag="">${structure:provider:pyams_content.global_alerts(ignore_missing=True)}</i>
             <!-- End alerts -->
 
         </div>  <!-- page -->
