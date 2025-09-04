@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.1.1
+-----
+ - renamed global alerts content provider
+
 2.1.0
 -----
  - updated dependencies: jsrender, FontAwesome, FullCalendar...

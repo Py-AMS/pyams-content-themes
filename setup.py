@@ -23,7 +23,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '2.1.0'
+version = '2.1.1'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -69,7 +69,7 @@ setup(name='pyams_content_themes',
           # -*- Extra requirements: -*-
           'fanstatic',
           "importlib_resources; python_version < '3.9'",
-          'pyams_content',
+          'pyams_content >= 2.7.0',
           'pyams_form',
           'pyams_layer',
           'pyams_portal',
